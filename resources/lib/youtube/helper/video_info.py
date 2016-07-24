@@ -526,7 +526,7 @@ class VideoInfo(object):
                    'Accept-Language': 'en-US,en;q=0.8,de;q=0.6'}
         params = {'video_id': video_id,
                   'hl': self._language}
-        if not self._context.get_settings().use_dash():
+        if not self._context.get_settings().get_bool('kodion.video.quality.mpd',False):
             params.update({'ps': 'leanback',
                            'el': 'leanback',
                            'width': '1920',
@@ -607,7 +607,7 @@ class VideoInfo(object):
             pass
         """
 
-        if self._context.get_settings().use_dash():
+        if self._context.get_settings().get_bool('kodion.video.quality.mpd',False):
             mpd_url = params.get('dashmpd', None)
             if mpd_url:
                 video_stream = {'url': mpd_url,
