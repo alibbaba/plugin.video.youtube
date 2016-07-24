@@ -7,7 +7,7 @@ __RE_IMDB__ = re.compile(r'(http(s)?://)?www.imdb.(com|de)/title/(?P<imdbid>[t0-
 
 
 class VideoItem(BaseItem):
-    def __init__(self, name, uri, image=u'', fanart=u''):
+    def __init__(self, name, uri, image=u'', fanart=u'',dashmpd=u''):
         BaseItem.__init__(self, name, uri, image, fanart)
         self._genre = None
         self._aired = None
@@ -26,6 +26,7 @@ class VideoItem(BaseItem):
         self._studio = None
         self._artist = None
         self._play_count = None
+        self.dashmpd = dashmpd
         pass
 
     def set_play_count(self, play_count):
@@ -34,6 +35,8 @@ class VideoItem(BaseItem):
 
     def get_play_count(self):
         return self._play_count
+    def get_dashmpd(self):
+        return self.dashmpd
 
     def add_artist(self, artist):
         if self._artist is None:

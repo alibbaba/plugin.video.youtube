@@ -21,7 +21,6 @@ def play_video(provider, context, re_match):
             return False
 
         video_stream = kodion.utils.select_stream(context, video_streams)
-
         if video_stream is None:
             return False
 
@@ -30,7 +29,11 @@ def play_video(provider, context, re_match):
             context.get_ui().show_notification(message, time_milliseconds=5000)
             return False
 
-        video_item = VideoItem(video_id, video_stream['url'])
+        #video_item = VideoItem(video_id, video_stream['url'],dashmpd=video_streams.get('dashmpd',''))
+        if video_stream.get('container') == 'mpd':
+            video_item = VideoItem(video_id, video_stream['url'],dashmpd=video_stream.get('dashmpd',''))
+        else:
+            video_item = VideoItem(video_id, video_stream['url'])
         video_id_dict = {video_id: video_item}
         utils.update_video_infos(provider, context, video_id_dict)
 

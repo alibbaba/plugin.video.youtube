@@ -3,7 +3,6 @@ __author__ = 'bromix'
 import urllib
 import urlparse
 import re
-
 from resources.lib.kodion import simple_requests as requests
 from ..youtube_exceptions import YouTubeException
 from .signature.cipher import Cipher
@@ -613,7 +612,8 @@ class VideoInfo(object):
             if mpd_url:
                 video_stream = {'url': mpd_url,
                                 'title': meta_info['video'].get('title', ''),
-                                'meta': meta_info}
+                                'meta': meta_info,
+                                'dashmpd': 'true'}
                 video_stream.update(self.FORMAT.get('9999'))
                 stream_list.append(video_stream)
                 return stream_list
